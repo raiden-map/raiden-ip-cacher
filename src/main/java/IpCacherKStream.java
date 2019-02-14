@@ -44,10 +44,10 @@ public class IpCacherKStream {
 
 
         final StreamsBuilder builder = new StreamsBuilder();
-        KStream<ProducerKey, AddressRegistered> source = builder.stream("raidenEvent.AddressRegistered");
+        KStream<ProducerKey, AddressRegistered> source = builder.stream("tracking.raidenEvent.AddressRegistered");
         KStream<ProducerKey,IPcacher> dest = source.map((key, value) -> new KeyValue<>(new ProducerKey(key.getTxHash()), ipCacherBuilder(value.getEndpointAddress().toString(), value.getEthAddress().toString())));
 
-        dest.to("raidenEvent.IPCacher");
+        dest.to("tracking.raidenEvent.IPCacher");
 
         source.print(Printed.toSysOut());
         dest.print(Printed.toSysOut());

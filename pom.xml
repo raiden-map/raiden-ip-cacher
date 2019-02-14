@@ -99,9 +99,9 @@
                         <configuration>
                             <sourceDirectory>${project.basedir}</sourceDirectory>
                             <includes>
-                                <include>AddressRegistered.avsc</include>
-                                <include>IPCacher.avsc</include>
-                                <include>ProducerKey.avsc</include>
+                                <include>schemas/AddressRegistered.avsc</include>
+                                <include>schemas/IPCacher.avsc</include>
+                                <include>schemas/ProducerKey.avsc</include>
                             </includes>
                             <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
                         </configuration>

@@ -1,0 +1,36 @@
+{
+    "namespace": "io.raidenmap.event.Endpoint",
+    "type": "record",
+    "name": "AddressRegistered",
+    "fields": [
+        {
+            "name": "endpointAddress",
+            "type": "string"
+        },
+        {
+            "name": "ethAddress",
+            "type": "string"
+        },
+        {
+            "name": "metadata",
+            "type": {
+                "type": "record",
+                "name": "metadata",
+                "fields": [
+                    {
+                        "name": "blockNumber",
+                        "type": "long"
+                    },
+                    {
+                        "name": "blockTimestamp",
+                        "type": "long"
+                    },
+                    {
+                        "name": "eventTimestamp",
+                        "type": "long"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -15,7 +15,7 @@ import java.util.Properties;
 public class IpCacherKStream {
 
     public static IPcacher ipCacherBuilder(String endpointAddress, String ethAddress) {
-        String[] locData = new String[3];
+
         JSONObject responseBody = new JSONObject();
         try {
             HttpResponse<JsonNode> response = Unirest.
@@ -23,12 +23,7 @@ public class IpCacherKStream {
                     .routeParam("endpointAddress", endpointAddress)
                     .asJson();
             responseBody = response.getBody().getObject();
-        }catch( Exception e){
-
-        }
-        locData[0] = responseBody.getString("country");
-        locData[1] = responseBody.getString("loc").split(",")[0];
-        locData[2] = responseBody.getString("loc").split(",")[1];
+        }catch( Exception e){        }
 
         return new IPcacher( endpointAddress, ethAddress, responseBody.getString("country"), Float.parseFloat(responseBody.getString("loc").split(",")[0]), Float.parseFloat(responseBody.getString("loc").split(",")[1])  );
     }

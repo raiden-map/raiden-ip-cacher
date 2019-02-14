@@ -1,0 +1,27 @@
+{
+    "namespace": "io.raidenmap.IPCacher",
+    "type": "record",
+    "name": "IPcacher",
+    "fields": [
+        {
+            "name": "endpointAddress",
+            "type": "string"
+        },
+        {
+            "name": "ethAddress",
+            "type": "string"
+        },
+        {
+            "name": "state",
+            "type": "string"
+        },
+        {
+            "name": "locX",
+            "type": "float"
+        },
+        {
+            "name": "locY",
+            "type": "float"
+        }
+    ]
+}

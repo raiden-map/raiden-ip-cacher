@@ -3,8 +3,11 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
+import io.raidenmap.event.Endpoint.AddressRegistered;
+import io.raidenmap.producerKey.ProducerKey;
 import org.apache.kafka.streams.*;
 import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.Printed;
 import org.json.JSONObject;
 import io.raidenmap.IPCacher.*;
 import java.util.Properties;
@@ -41,10 +44,14 @@ public class IpCacherKStream {
 
 
         final StreamsBuilder builder = new StreamsBuilder();
-        KStream<ProducerKey, AddressRegistered> source = builder.stream("tracking.raidenEvent.AddressRegistered");
+        KStream<ProducerKey, AddressRegistered> source = builder.stream("raidenEvent.AddressRegistered");
         KStream<ProducerKey,IPcacher> dest = source.map((key, value) -> new KeyValue<>(new ProducerKey(key.getTxHash()), ipCacherBuilder(value.getEndpointAddress().toString(), value.getEthAddress().toString())));
 
-        dest.to("tracking.raidenEvent.IPCacher");
+        dest.to("raidenEvent.IPCacher");
+
+        source.print(Printed.toSysOut());
+        dest.print(Printed.toSysOut());
+
 
         final Topology topology = builder.build();
         final KafkaStreams streams = new KafkaStreams(topology, props);
